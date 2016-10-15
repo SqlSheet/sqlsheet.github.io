@@ -4,10 +4,12 @@
   "description": "the technology to have your google spreadsheet as your database",
   "main": "index.js",
   "dependencies": {
+    "angular": "^1.5.8",
     "materialize-css": "^0.97.7"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.13",
     "gulp-linker": "^0.1.7"
   },
   "scripts": {
