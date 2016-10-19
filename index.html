@@ -1,5 +1,5 @@
 <!DOCTYPE html>
- <html>
+ <html ng-app="sqlsheet">
    <head>
      <!--Import Google Icon Font-->
      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -7,9 +7,13 @@
      <!--Let browser know website is optimized for mobile-->
      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
      <!--STYLESHEET-->
      <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css"></script>
      <link type="text/css" rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.min.css"></script>
+     <link type="text/css" rel="stylesheet" href="node_modules/highlight/lib/vendor/highlight.js/styles/default.css"></script>
      <link type="text/css" rel="stylesheet" href="css/style.css"></script>
      <!--STYLESHEET END-->
 
@@ -23,58 +27,14 @@
             <img class="logo" src="/images/logo.svg"/>
             <span>SqlSheet</span>
           </a>
-          <ul id="nav-mobile" class="right">
+          <ul id="nav-mobile" class="right hide-on-down">
             <li><a href="#/overview">Overview</a></li>
             <li><a href="#/docs">Docs</a></li>
-            <li><a href="#/community">Community</a></li>
           </ul>
         </div>
     </nav>
 
-    <div class="light-green darken-2 banner row">
-      <div class="header">Explore the opportunity to have your Google Spreadsheet As your NoSql Database</div>
-      <div class="action"><a class="waves-effect waves-light btn black btn-large" href="#/docs">Discover</a></div>
-    </div>
-
-    <div class="info-section">
-      <div class="header">Hey there! this is SqlSheet,</div>
-      <div class="body">
-        SqlSheet is a Google Script Library that encourages rapid and clean development and deployment of your Database.
-        In fact, your Google Spreadsheet is your Database. You would query data from your Google Spreadsheet using NoSql Querying paradigm.
-        Free yourself from the hassle of Back End Web development, and Database setup and configuration.
-        Then focus on writing your Front End Web or Mobile Application, without the need to worry about the database on a server.
-        It’s free and open source.
-      </div>
-    </div>
-
-    <div class="arguments">
-      <div class="arg-item">
-        <div class="img-ctn">
-          <span class="mdi mdi-flash"></span>
-        </div>
-        <div class="text">
-          Quickly have your Google Spreadsheet setup as your database. No need to lose hair over the configuration.
-        </div>
-      </div>
-
-      <div class="arg-item">
-        <div class="img-ctn">
-          <span class="mdi mdi-arrow-right-bold"></span>
-        </div>
-        <div class="text">
-          You might modify your google spreadsheet by sending http requests.
-        </div>
-      </div>
-
-      <div class="arg-item">
-        <div class="img-ctn">
-          <span class="mdi mdi-emoticon-happy"></span>
-        </div>
-        <div class="text">
-          Focus on your mobile and Front End Web App, and let your google spreadsheet handle your data.
-        </div>
-      </div>
-    </div>
+    <div ng-view style="min-height: calc(100vh - 134px);"></div>
 
     <footer class="page-footer grey darken-4">
       <div class="footer-copyright grey darken-4">
@@ -89,7 +49,13 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="node_modules/angular/angular.min.js"></script>
-    <script src="app/sqlsheet.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="node_modules/highlight/lib/vendor/highlight.js/highlight.pack.js"></script>
+    <script src="apps/sqlsheet.js"></script>
+    <script src="apps/com/controller.js"></script>
+    <script src="apps/docs/controller.js"></script>
+    <script src="apps/docs/filter.js"></script>
+    <script src="apps/home/controller.js"></script>
     <!--SCRIPTS END-->
 
    </body>

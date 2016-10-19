@@ -128,3 +128,45 @@ nav ul a:hover {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
 }
+
+ /*DOCS CSS*/
+ .docSection {
+   padding: 24px;
+ }
+
+ .docSection > .head{
+   font-size: 24px;
+   color: #424242;
+   font-weight: 600;
+ }
+
+ .docSection > .sub-head{
+   font-size: 20px;
+   font-weight: 600;
+ }
+
+ .docSection > .body > p {
+    text-indent: 50px;
+    line-height: 24px;
+    text-align: justify;
+}
+
+.collection a.collection-item{
+  background-color: #fff;
+  cursor: pointer;
+  color: #424242;
+  font-size: 16px;
+  font-weight: 600;
+  border: 0;
+}
+
+.collection a.collection-item.active{
+  color: #689f38;
+  font-weight: 600;
+  background-color: #fff;
+}
+
+.collection{
+  border: 0;
+  margin-top: 24px;
+}

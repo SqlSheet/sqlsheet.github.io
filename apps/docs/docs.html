@@ -1,0 +1,226 @@
+<div class="row" ng-init="docView = 'startConfig'" hljs-component>
+
+  <div class="col s3">
+    <div class="collection">
+      <a ng-click="docView = 'startConfig'" class="collection-item {{docView == 'startConfig' | isCollectionActive}}">Getting Started</a>
+      <a ng-click="docView = 'SqlSheet'" class="collection-item {{docView == 'SqlSheet' | isCollectionActive}}">SqlSheet.gs</a>
+      <a ng-click="docView = 'startCode'" class="collection-item {{docView == 'startCode' | isCollectionActive}}">Host Online</a>
+    </div>
+  </div>
+
+  <div class="col s9 content">
+    <section class="docSection" ng-show="docView == 'startConfig'">
+      <div class="head">
+        Getting Started
+      </div>
+      <div class="body">
+        <p>
+          First, create a folder in google drive so you would be able to create google script files
+          and start a new poject.
+        </p>
+        <p>
+          Next, create a google script file along with google spreadsheet file.
+          You might call it any name.
+          Google script editor needs to be installed in your google drive.
+          You might install it by right clicking, then go to "more",
+          click on "connect more apps" option.
+          You would be prompted a dialog, search for "google script"
+          and install it to your google drive
+        </p>
+        <p>
+          In the next section, we would share how to include SqlSheet
+          in your google script project
+        </p>
+      </div>
+      <div class="head">
+        Setup your google spreadsheet
+      </div>
+      <div class="body">
+        <p>
+          The first row of your google spreadsheet should be the name of the columns. Also, they are considered as the keys of values.
+        </p>
+        <p>
+          <img src="images/sheet-setup-snap.png"/>
+        </p>
+        <p>
+          Please, keep in record the unique identification of your google spreadsheet : https://docs.google.com/spreadsheets/d/<strong>SHEET_UNIQUE_ID</strong>/
+        </p>
+      </div>
+    </section>
+
+    <section class="docSection" ng-show="docView == 'SqlSheet'">
+      <div class="head">
+        Include SqlSheet to your Google Script File
+      </div>
+      <div class="body">
+        <p>
+          SqlSheet can be included as a library to your Google Script Editor.
+          In order to add it to your file, click on "Ressources" then click on "Libraries...".
+          A dialog will show up.
+        </p>
+        <p>
+          In the text field besides "Find a Library",
+          insert the following input : <strong>MTN76HkONAttUPWU7IvkIPkLYGYD10xZN</strong> <br/>
+          Once you hit "select", SqlSheet would be added to your project
+        </p>
+        <p>
+          Congratulation! you have included SqlSheet to your project,
+          now it is time to explain how you could use SqlSheet in your project:
+        </p>
+        <p>
+          <img src="images/library.png"/>
+        </p>
+      </div>
+      <div class="head">
+        The Code
+      </div>
+      <div class="sub-head">
+        1. initialize SqlSheet
+      </div>
+      <div class="body">
+        <p>
+          First, you would to create a new instance SqlSheet which you provide it with
+          the google spreadsheet unique identification as a parameter <br/>
+          So you would end up with an instance that is linked with
+          the google spreadsheet and ready to update the google spreadsheet data.
+          <pre>
+            <code class="javascript">
+  var sheetKey = <strong>SHEET_UNIQUE_ID</strong>;
+  var sqlSheet = new SqlSheet.SqlSheet(sheetKey);
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div class="sub-head">
+        2. Get Data
+      </div>
+      <div class="body">
+        <p>
+          In order to get data to your google spreadsheet,
+          you would need to call the function getData from your google script
+          and provide it a query parameter under the form of a JSON object<br/>
+          there are 5 differents QUERY_TYPE:
+          <pre>
+            <code class="javascript">
+    eq : return objects that have COL_NAME value equal to VALUE
+    lt : return objects that have COL_NAME value less than VALUE
+    gt : return objects that have COL_NAME value greater than VALUE
+    lteq : return objects that have COL_NAME value less than or equal VALUE
+    gteq : return objects that have COL_NAME value greater than or equal VALUE
+            </code>
+          </pre>
+          <pre>
+            <code class="javascript">
+  sqlSheet.getData({
+      "COL_NAME_1" : {
+        "eq" : VALUE
+      },
+      "COL_NAME_2" : {
+        "QUERY_TYPE" : VALUE
+      },
+      .
+      .
+      .
+  });
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div class="sub-head">
+        2. Add Data
+      </div>
+      <div class="body">
+        <p>
+          In order to add new data to your google spreadsheet,
+          you would need to call the function addData from your google script
+          and provide it the data to be added under the form of a JSON object.
+          You won't need to specify the uId value, it is generated automatically for you<br/>
+          there are 5 differents QUERY_TYPE:
+          <pre>
+            <code class="javascript">
+  sqlSheet.addData({
+    "COL_NAME_1" : VALUE,
+    "COL_NAME_2" : VALUE,
+    "COL_NAME_3" : VALUE,
+    .
+    .
+    .
+  });
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div class="sub-head">
+        3. update Data
+      </div>
+      <div class="body">
+        <p>
+          In order to update a specific value in your google spreadsheet,
+          you would need to call the function updateData from your google script.
+          and provide it the query under the form of a JSON object<br/>
+          first you specify the uId value of the row, then you provide "newVal" the column name as the key and the value that it should be updated with.
+          <pre>
+            <code class="javascript">
+  sqlSheet.updateData([
+      {
+      	"uId" : ROW_UID,
+          "newVal" : {
+              COL_NAME : VALUE
+          }
+      },
+      {
+      	"uId" : ROW_UID,
+          "newVal" : {
+              COL_NAME : VALUE
+          }
+      },
+      .
+      .
+      .
+  ]);
+            </code>
+          </pre>
+        </p>
+      </div>
+      <div class="sub-head">
+        4. detele Data
+      </div>
+      <div class="body">
+        <p>
+          In order to date rows from your google spreadsheet,
+          you would need to call the function deleteData from your google script.
+          and provide it with an array of uId values, which represents the rows that needs to be deleted<br/>
+          <pre>
+            <code class="javascript">
+  sqlSheet.deleteData([ROW_UID_1, ROW_UID_2]);
+            </code>
+          </pre>
+        </p>
+      </div>
+    </section>
+
+    <section class="docSection" ng-show="docView == 'startCode'">
+      <div class="head">
+        Start code a ressources
+      </div>
+      <div class="body">
+        <p>
+          Follow the link below to view the google script code that covers all features presented in the previous section
+          <a target="_blank" href="//script.google.com/d/1BtcoP271A5SHN2sVyBLm0tUMMQl4QiRe28Ad3ntGBz1yeWXnYc6VCL1v/edit?usp=drive_web">Starter Code</a>
+        </p>
+        <p>
+          the following code updates data of the following google spreadsheet
+          <a target="_blank" href="//docs.google.com/spreadsheets/d/1Ful6VYX3NA3nt3XFAGMEHGfg845uhq-rrQWHa2A7O_w/">Google Spreadsheet</a>
+        </p>
+        <p>
+          You might update the google spreadsheet using this HTTP Requests using postman, you might import the collection of HTTP requests using this link. <strong> https://www.getpostman.com/collections/4aa8daad9d75645c073f </strong>
+        </p>
+        <p>
+          Finally, you might get to know more of the SqlSheet implementation from this link,
+          <a target="_blank" href="//script.google.com/d/1v22cr-lWDuaKsSJUQcMU-aK2z9UabWlv7CtN8uPHdZSwJ2fOrx_G8c0j/edit?usp=drive_web">SqlSheet Code</a>
+        </p>
+      </div>
+    </section>
+  </div>
+
+</div>
